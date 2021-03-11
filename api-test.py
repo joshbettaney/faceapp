@@ -34,15 +34,20 @@ from azure.cognitiveservices.vision.face.models import TrainingStatusType, Perso
 # first_image_face_ID = detected_faces[0].face_id
 
 # print(detected_faces.keys)
-
+image = input("enter url: ")
 
 endpointURL = "https://west-spike-test.cognitiveservices.azure.com/face/v1.0/detect?returnFaceAttributes=emotion"
 body = {
-    "url": "https://d1qsx5nyffkra9.cloudfront.net/sites/default/files/article-image/eminence-organics-acne-face-mapping.jpg"
+    "url": image
 }
 
 x = requests.post(endpointURL, json = body, headers = {"Ocp-Apim-Subscription-Key": "c465067a805d40ffaa0b739cb41d4588", "Content-Type": "application/json"})
 
 emotions = x.json()[0]['faceAttributes']['emotion']
+emotionsArr = []
 
-print(emotions)
+for emotion in sorted(emotions):
+    print(emotion, emotions[emotion])
+
+
+# print("anger =", emotions['anger'])
