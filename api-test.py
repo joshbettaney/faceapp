@@ -1,4 +1,5 @@
 import asyncio
+import json
 import io
 import glob
 import os
@@ -34,22 +35,29 @@ from azure.cognitiveservices.vision.face.models import TrainingStatusType, Perso
 # first_image_face_ID = detected_faces[0].face_id
 
 # print(detected_faces.keys)
+
 image = input("enter url: ")
 
-endpointURL = "https://west-spike-test.cognitiveservices.azure.com/face/v1.0/detect?returnFaceAttributes=emotion"
-body = {
-    "url": image
-}
+while image != "q":
+    image = input("enter url: ")
+    if image == "q":
+        break
 
-x = requests.post(endpointURL, json = body, headers = {"Ocp-Apim-Subscription-Key": "c465067a805d40ffaa0b739cb41d4588", "Content-Type": "application/json"})
+    endpointURL = "https://west-spike-test.cognitiveservices.azure.com/face/v1.0/detect?returnFaceAttributes=emotion"
+    body = {
+        "url": image
+    }
 
-emotions = x.json()[0]['faceAttributes']['emotion']
-emotionsDictionary = json.loads(emotions)
+    x = requests.post(endpointURL, json = body, headers = {"Ocp-Apim-Subscription-Key": "c465067a805d40ffaa0b739cb41d4588", "Content-Type": "application/json"})
 
-print(emotionsDictionary)
+    emotions = x.json()[0]['faceAttributes']['emotion']
 
-# for emotion in sorted(emotions):
-#     print(emotion, emotions[emotion])
+    sorted_dict = {}
+    sorted_keys = sorted(emotions, key=emotions.get,reverse=True)  
 
+    for w in sorted_keys:
+        sorted_dict[w] = emotions[w]
 
-# print("anger =", emotions['anger'])
+    for emotion in sorted_dict:
+        print(emotion, emotions[emotion])
+
