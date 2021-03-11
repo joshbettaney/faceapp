@@ -44,10 +44,12 @@ body = {
 x = requests.post(endpointURL, json = body, headers = {"Ocp-Apim-Subscription-Key": "c465067a805d40ffaa0b739cb41d4588", "Content-Type": "application/json"})
 
 emotions = x.json()[0]['faceAttributes']['emotion']
-emotionsArr = []
+emotionsDictionary = json.loads(emotions)
 
-for emotion in sorted(emotions):
-    print(emotion, emotions[emotion])
+print(emotionsDictionary)
+
+# for emotion in sorted(emotions):
+#     print(emotion, emotions[emotion])
 
 
 # print("anger =", emotions['anger'])
