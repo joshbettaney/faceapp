@@ -38,8 +38,16 @@ from azure.cognitiveservices.vision.face.models import TrainingStatusType, Perso
 
 image = input("enter url: ")
 
+
+first = True
+
 while image != "q":
-    image = input("enter url: ")
+
+    
+    if first == False :
+        image = input("enter url: ")
+
+    first = False
     if image == "q":
         break
 
