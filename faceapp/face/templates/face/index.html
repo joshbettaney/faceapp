@@ -8,5 +8,19 @@
 </head>
 <body>
     <h1>FaceApp!</h1>
+    <script>
+        const image = "https://media.glamour.com/photos/5a425fd3b6bcee68da9f86f8/16:9/w_2560%2Cc_limit/best-face-oil.png";
+        const url = "https://west-spike-test.cognitiveservices.azure.com/face/v1.0/detect?returnFaceAttributes=emotion";
+        fetch(url, {
+            method: 'POST',
+            body: {
+                url: image
+            },
+            headers: {
+                "Ocp-Apim-Subscription-Key": "c465067a805d40ffaa0b739cb41d4588",
+                "Content-type": "application/json"
+            }
+        }).then(res => console.log(res))
+    </script>
 </body>
 </html>
